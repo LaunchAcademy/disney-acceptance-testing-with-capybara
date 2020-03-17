@@ -1,0 +1,19 @@
+<h1>Add a Movie Here!</h1>
+
+<%= @errors %>
+
+<form action="/movies/new" method="post">
+  <label for="title">Title</label>
+  <input type="text" id="title" name="movie_title">
+  <br/>
+
+  <label for="release_year">Release Year</label>
+  <input type="text" id="release_year" name="movie_release_year">
+  <br/>
+
+  <label for="runtime">Runtime</label>
+  <input type="text" id="runtime" name="movie_runtime">
+  <br/>
+
+  <input type="submit" value="Add Movie">
+</form>
