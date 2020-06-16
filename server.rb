@@ -12,13 +12,35 @@ end
 get "/movies" do
   @movies = []
 
-  CSV.foreach(csv_file, headers: true) do |row|
+  CSV.foreach("movies.csv", headers: true) do |row|
     @movies << row.to_h
   end
-  
-  erb :"movies/index"
+
+  # @movies = CSV.readlines("movies.csv", headers: true)
+
+  erb(:"movies/index")
   # Note: this is syntax (with quotes) if we have our erb files in a subfolder!
 end
 
+get "/movies/new" do
+  erb :"movies/new"
+end
 
-# Helper Methods
+post "/movies" do
+  title = params[:title]
+  release_year = params[:release_year]
+  runtime = params[:runtime]
+
+  if title == ""
+    @error = "You forget the title you silly billy"
+
+    erb :"movies/new"
+  else
+    CSV.open("movies.csv", "a") do |csv| 
+      csv << [title, release_year, runtime]
+    end
+
+    redirect "/movies"
+  end
+
+end
