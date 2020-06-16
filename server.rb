@@ -11,26 +11,14 @@ end
 
 get "/movies" do
   @movies = []
+
   CSV.foreach(csv_file, headers: true) do |row|
     @movies << row.to_h
   end
+  
   erb :"movies/index"
   # Note: this is syntax (with quotes) if we have our erb files in a subfolder!
 end
 
 
 # Helper Methods
-
-def csv_file
-  if ENV["RACK_ENV"] == "test"
-    "data/movies_test.csv"
-  else
-    "data/movies.csv"
-  end
-end
-
-def reset_csv
-  CSV.open(csv_file, "w", headers: true) do |csv|
-    csv << ["title", "release_year", "runtime"]
-  end
-end
