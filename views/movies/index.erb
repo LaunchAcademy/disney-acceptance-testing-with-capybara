@@ -3,7 +3,7 @@
 <ul>
   <% @movies.each do |movie| %>
     <li>
-      <%= "#{movie["title"]}, #{movie["release_year"]}, #{movie["runtime"]} runtime" %>
+      <%= "#{movie["title"]}, #{movie["release_year"]}, #{movie["runtime"]}" %>
     </li>
   <% end %>
 </ul>
