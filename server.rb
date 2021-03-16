@@ -51,7 +51,7 @@ post '/movies' do
   end
 end
 
-#helper methods
+#helper method
 def csv_file
   if ENV["RACK_ENV"] == "test"
     "movies_test.csv"
