@@ -3,7 +3,7 @@ require "rspec"
 require "capybara/rspec"
 require "csv"
 
-require_relative "../server"
+require_relative ""
 
 Capybara.app = Sinatra::Application
 
