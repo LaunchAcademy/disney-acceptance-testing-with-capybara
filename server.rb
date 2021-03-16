@@ -21,36 +21,6 @@ get '/movies/new' do
   erb :"movies/new"
 end
 
-post '/movies' do
-  title = params["title"]
-  release_year = params["release_year"]
-  runtime = params["runtime"]
-
-  if title.strip != "" && release_year.strip != "" && runtime.strip != ""
-    CSV.open(csv_file, "a") do |csv|
-      csv << [title, release_year, runtime]
-    end
-  
-    redirect "/movies"
-  else
-    @errors = "Error!"
-
-    if title.strip == ""
-      @errors += "Title can't be blank"      
-    end
-
-    if release_year.strip == ""
-      @errors += "Release year can't be blank"      
-    end
-
-    if runtime.strip == ""
-      @errors += "Runtime can't be blank"      
-    end
-
-    erb :"movies/new"
-  end
-end
-
 #helper method
 def csv_file
   if ENV["RACK_ENV"] == "test"
