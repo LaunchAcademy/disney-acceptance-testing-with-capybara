@@ -1,2 +1,20 @@
 <h1>New Movie Form </h1>
 
+<% if @errors %>
+  <% @errors.each do |error| %>
+    <li><%= error %></li>
+  <% end %>
+<% end %>
+
+<form method="POST" action="/movies/new">
+  <label for="title">Title</label>
+  <input id="title" name="title" type="text">
+
+  <label for="release_year">Release Year</label>
+  <input id="release_year" name="release_year" type="text">
+
+  <label for="runtime">Runtime</label>
+  <input id="runtime" name="runtime" type="text">
+
+  <input type="submit" value="Add New Movie">
+</form>
