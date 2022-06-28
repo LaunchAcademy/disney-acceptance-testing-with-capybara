@@ -1,7 +1,8 @@
 source "https://rubygems.org"
 
-gem "puma"
-gem "sinatra"
+
+gem "sinatra", "~> 2.0"
+gem "sinatra-contrib"
 
 group :development, :test do
   gem "capybara"
