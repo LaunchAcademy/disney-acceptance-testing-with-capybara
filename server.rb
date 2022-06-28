@@ -1,28 +1,36 @@
 require "sinatra"
 require "pry"
 require "csv"
+require 'sinatra/reloader' if development?
+
 
 set :bind, "0.0.0.0"
 set :views, File.join(File.dirname(__FILE__), "views")
+
+#helper method
+def csv_file
+  if ENV["RACK_ENV"] == "test"
+    "movies_test.csv"
+  else
+    "movies.csv"
+  end
+end
 
 get "/" do
   redirect "/movies"
 end
 
 get "/movies" do
-  @movies = []
-
   @movies = CSV.readlines(csv_file, headers: true)
 
-  erb(:"movies/index")
+  erb :"movies/index" 
 end
 
 get '/movies/new' do
   erb :"movies/new"
 end
 
-post "/movies/new" do
-  # binding.pry
+post "/movies" do
   title = params["title"]
   release_year = params["release_year"]
   runtime = params["runtime"]
@@ -53,11 +61,3 @@ post "/movies/new" do
 
 end
 
-#helper method
-def csv_file
-  if ENV["RACK_ENV"] == "test"
-    "movies_test.csv"
-  else
-    "movies.csv"
-  end
-end
