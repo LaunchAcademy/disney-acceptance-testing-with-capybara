@@ -31,6 +31,7 @@ get '/movies/new' do
 end
 
 post "/movies" do
+  # binding.pry
   title = params["title"]
   release_year = params["release_year"]
   runtime = params["runtime"]
@@ -55,7 +56,7 @@ post "/movies" do
     CSV.open(csv_file, "a") do |csv|
       csv << [title, release_year, runtime]
     end
-  
+
     redirect "/movies"
   end
 
